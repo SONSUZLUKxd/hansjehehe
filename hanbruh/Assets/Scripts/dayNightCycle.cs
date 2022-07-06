@@ -19,6 +19,13 @@ public class dayNightCycle : MonoBehaviour
         saat = (zaman2 - dakika) / 60;
         if(zaman > 360) { zaman = 0; }
         transform.eulerAngles = new Vector3(zaman - 90, 0, 0);
-        timeText.text = saat.ToString() + ":" + dakika.ToString("0");
+        if(saat < 10)
+        {
+            timeText.text = "0" + saat.ToString() + ":" + dakika.ToString("0");
+        }
+        else
+        {
+            timeText.text = saat.ToString() + ":" + dakika.ToString("0");
+        }
     }
 }
