@@ -21,6 +21,7 @@ public class PlayerControl : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+    float camvec;
     private void Update()
     {
         horizontal = Mathf.Lerp(horizontal, Input.GetAxis("Horizontal"), 9 * Time.fixedDeltaTime);
@@ -33,8 +34,9 @@ public class PlayerControl : MonoBehaviour
         xRot -= Input.GetAxisRaw("Mouse Y") * sensivity * Time.deltaTime;
         xRot = Mathf.Clamp(xRot, -40f, 70f);
         cam.transform.localRotation = Quaternion.Euler(xRot, 0, 0);
-        transform.Rotate(Vector3.up, Input.GetAxisRaw("Mouse X") * sensivity * Time.deltaTime);
-        if(Input.GetKey(KeyCode.LeftShift)) { speed = 6; } 
-        else { speed = 2; }
+        camvec = Input.GetAxisRaw("Mouse X") * sensivity * Time.deltaTime;
+        transform.Rotate(Vector3.up, camvec);
+        if (Input.GetKey(KeyCode.LeftShift)) { speed = Mathf.Lerp(speed, 6, 9 * Time.fixedDeltaTime); } 
+        else { speed = Mathf.Lerp(speed, 2, 9 * Time.fixedDeltaTime); }
     }
 }
